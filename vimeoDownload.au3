@@ -49,7 +49,7 @@ For $i = 1 To $iCountLines
 				$user = StringSplit($title, '-')
 				For $i = 2 To $user[0] ; Loop through the array returned by StringSplit to display the individual values.
 					If ($i > 2) Then ;; needs tested to confirm replacing -
-						$titleInfo = $titleInfo & "-" $user[$i]
+						$titleInfo = $titleInfo & "-" & $user[$i]
 					Else
 						$titleInfo = $titleInfo & $user[$i]
 					EndIf
