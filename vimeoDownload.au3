@@ -42,7 +42,7 @@ For $i = 1 To $iCountLines
 				ConsoleWrite('+' & 'C:\Progra~2\VideoLAN\VLC\vlc.exe' & $pram & @CRLF)
 				Local $iPID = ShellExecute("vlc.exe", $pram, @ProgramFilesDir & "\VideoLAN\VLC\")
 				Sleep(5000)
-				$title = WinGetTitle("VLC")
+				$title = StringTrimRight (WinGetTitle("VLC"), 19 )
 				ConsoleWrite('>' & $iPID & ":" & $title & @CRLF)
 				$user = StringSplit($title, '-')
 				logData($user[1], $user[2], $file)
@@ -55,7 +55,6 @@ For $i = 1 To $iCountLines
 		ConsoleWrite($i & ":" & $sFileRead & @CRLF)
 	EndIf
 Next
-
 
 Func logData($user, $title, $code)
 	Local Const $sFilePath = $fSaveDir & "data.ini"
