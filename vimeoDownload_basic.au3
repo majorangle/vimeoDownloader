@@ -1,12 +1,8 @@
 ; major - Version 1.17
-#include <InetConstants.au3>
 #include <File.au3>
-Opt("WinTitleMatchMode", 2)
 $sFilePath = @ScriptDir & "\feeds"
-Local $iCountLines = _FileCountLines($sFilePath)
-ConsoleWrite("$iCountLines" & ":" & $iCountLines & @CRLF)
 Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
-Local $url = 'https://vimeo.com/508927445'
+Local $url = 'https://vimeo.com/385130750'
 ; Split the URL down
 $split = StringSplit($url, '/')
 ;read end of array fir file name

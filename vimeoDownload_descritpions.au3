@@ -1,13 +1,10 @@
 ; major - Version 1.17
-#include <InetConstants.au3>
 #include <File.au3>
 Opt("WinTitleMatchMode", 2)
 $sFilePath = @ScriptDir & "\feeds"
-Local $iCountLines = _FileCountLines($sFilePath)
-ConsoleWrite("$iCountLines" & ":" & $iCountLines & @CRLF)
 Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
 Local $titleInfo
-Local $url = 'https://vimeo.com/508927445'
+Local $url = 'https://vimeo.com/385130750'
 
 ; Split the URL down
 $split = StringSplit($url, '/')
@@ -24,6 +21,7 @@ If (FileExists($fSaveDir) == 0) Then
 EndIf
 ;define save path
 $fSave = $fSaveDir & $file & ".mp4"
+ConsoleWrite('+' & "$fSave:" & $fSave & @CRLF)
 If (FileExists($fSave) == 0) Then
 	;https://wiki.videolan.org/Transcode
 	;https://wiki.videolan.org/Documentation:Modules/transcode/
@@ -55,6 +53,8 @@ If (FileExists($fSave) == 0) Then
 	logData($user[1], $titleInfo, $file)
 	ConsoleWrite('>' & $iPID & ":::ProcessWaitClose" & @CRLF)
 	ProcessWaitClose($iPID)
+Else
+	ConsoleWrite('!' & "Pass:::" & $fSave & @CRLF)
 EndIf
 
 ; log data function
