@@ -1,3 +1,4 @@
+; major - Version 1.17
 #include <InetConstants.au3>
 #include <File.au3>
 Opt("WinTitleMatchMode", 2)
@@ -6,7 +7,7 @@ Local $iCountLines = _FileCountLines($sFilePath)
 ConsoleWrite("$iCountLines" & ":" & $iCountLines & @CRLF)
 Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
 Local $oXML = ObjCreate("Microsoft.XMLDOM")
-local $titleInfo
+Local $titleInfo
 
 For $i = 1 To $iCountLines
 	$sFileRead = FileReadLine($hFileOpen, $i)
@@ -43,11 +44,15 @@ For $i = 1 To $iCountLines
 				ConsoleWrite('+' & 'C:\Progra~2\VideoLAN\VLC\vlc.exe' & $pram & @CRLF)
 				Local $iPID = ShellExecute("vlc.exe", $pram, @ProgramFilesDir & "\VideoLAN\VLC\")
 				Sleep(5000)
-				$title = StringTrimRight (WinGetTitle("VLC"), 19 )
+				$title = StringTrimRight(WinGetTitle("VLC"), 19)
 				ConsoleWrite('>' & $iPID & ":" & $title & @CRLF)
 				$user = StringSplit($title, '-')
 				For $i = 2 To $user[0] ; Loop through the array returned by StringSplit to display the individual values.
-				 $titleInfo = $titleInfo & $user[$i]
+					If ($i > 2) Then ;; needs tested to confirm replacing -
+						$titleInfo = $titleInfo & "-" $user[$i]
+					Else
+						$titleInfo = $titleInfo & $user[$i]
+					EndIf
 				Next
 				ConsoleWrite('+' & $titleInfo & @CRLF)
 				logData($user[1], $titleInfo, $file)
