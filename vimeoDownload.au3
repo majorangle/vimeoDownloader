@@ -6,6 +6,7 @@ Local $iCountLines = _FileCountLines($sFilePath)
 ConsoleWrite("$iCountLines" & ":" & $iCountLines & @CRLF)
 Local $hFileOpen = FileOpen($sFilePath, $FO_READ)
 Local $oXML = ObjCreate("Microsoft.XMLDOM")
+local $titleInfo
 
 For $i = 1 To $iCountLines
 	$sFileRead = FileReadLine($hFileOpen, $i)
@@ -45,7 +46,11 @@ For $i = 1 To $iCountLines
 				$title = StringTrimRight (WinGetTitle("VLC"), 19 )
 				ConsoleWrite('>' & $iPID & ":" & $title & @CRLF)
 				$user = StringSplit($title, '-')
-				logData($user[1], $user[2], $file)
+				For $i = 2 To $user[0] ; Loop through the array returned by StringSplit to display the individual values.
+				 $titleInfo = $titleInfo & $user[$i]
+				Next
+				ConsoleWrite('+' & $titleInfo & @CRLF)
+				logData($user[1], $titleInfo, $file)
 				ConsoleWrite('>' & $iPID & ":::ProcessWaitClose" & @CRLF)
 				ProcessWaitClose($iPID)
 			Else
